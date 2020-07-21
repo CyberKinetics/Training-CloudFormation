@@ -10,52 +10,52 @@ Resources:
   CorporateVPC:
     Type: AWS::EC2::VPC
       Properties:
-      CidrBlock: 10.0.0.0/24
-      InstanceTenancy: default
-      Tags:
-      - Key: Name
-        Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]  
+        CidrBlock: 10.0.0.0/24
+        InstanceTenancy: default
+        Tags:
+        - Key: Name
+          Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]  
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     DependsOn: VPC
   AttachGateway:
     Type: AWS::EC2::VPCGatewayAttachment
       Properties:
-      VpcId: !Ref VPC
-      InternetGatewayId: !Ref InternetGateway
+        VpcId: !Ref VPC
+        InternetGatewayId: !Ref InternetGateway
   PublicSubnetA:
     Type: AWS::EC2::Subnet
       Properties:
-      VpcId: !Ref VPC
-      CidrBlock: 10.0.10.0/26
-      AvailabilityZone: !Select [ 0, !GetAZs ]    # Returns available AZs as an array
-      Tags:
-      - Key: Name
-        Value: !Sub ${AWS::StackName}-Public-A
+        VpcId: !Ref VPC
+        CidrBlock: 10.0.10.0/26
+        AvailabilityZone: !Select [ 0, !GetAZs ]    # Returns available AZs as an array
+        Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-Public-A
     PublicSubnetB:
       Type: AWS::EC2::Subnet
         Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.64/26
-        AvailabilityZone: !Select [ 1, !GetAZs ]    
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Public-B
+          VpcId: !Ref VPC
+          CidrBlock: 10.0.10.64/26
+          AvailabilityZone: !Select [ 1, !GetAZs ]    
+          Tags:
+          - Key: Name
+            Value: !Sub ${AWS::StackName}-Public-B
     PrivateSubnetA:
       Type: AWS::EC2::Subnet
         Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.128/26
-        AvailabilityZone: !Select [ 0, !GetAZs ]   
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Private-A
+          VpcId: !Ref VPC
+          CidrBlock: 10.0.10.128/26
+          AvailabilityZone: !Select [ 0, !GetAZs ]   
+          Tags:
+          - Key: Name
+            Value: !Sub ${AWS::StackName}-Private-A
     PrivateSubnetB:
       Type: AWS::EC2::Subnet
         Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.192/26
-        AvailabilityZone: !Select [ 1, !GetAZs ]    
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Private-B
+          VpcId: !Ref VPC
+          CidrBlock: 10.0.10.192/26
+          AvailabilityZone: !Select [ 1, !GetAZs ]    
+          Tags:
+          - Key: Name
+            Value: !Sub ${AWS::StackName}-Private-B
