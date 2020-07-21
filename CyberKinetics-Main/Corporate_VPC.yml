@@ -32,30 +32,30 @@ Resources:
       Tags:
       - Key: Name
         Value: !Sub ${AWS::StackName}-Public-A
-    PublicSubnetB:
-      Type: AWS::EC2::Subnet
-      Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.64/26
-        AvailabilityZone: !Select [ 1, !GetAZs ]    
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Public-B
-    PrivateSubnetA:
-      Type: AWS::EC2::Subnet
-      Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.128/26
-        AvailabilityZone: !Select [ 0, !GetAZs ]   
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Private-A
-    PrivateSubnetB:
-      Type: AWS::EC2::Subnet
-      Properties:
-        VpcId: !Ref VPC
-        CidrBlock: 10.0.10.192/26
-        AvailabilityZone: !Select [ 1, !GetAZs ]    
-        Tags:
-        - Key: Name
-          Value: !Sub ${AWS::StackName}-Private-B
+  PublicSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.10.64/26
+      AvailabilityZone: !Select [ 1, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Public-B
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.10.128/26
+      AvailabilityZone: !Select [ 0, !GetAZs ]   
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Private-A
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.10.192/26
+      AvailabilityZone: !Select [ 1, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Private-B
