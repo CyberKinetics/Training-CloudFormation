@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: This template creates the CyberKinetics Corporate VPC
-  Parameters:               # Required for user input when creating the stack
+  Parameters:               # Required for user input when creating the stack TESTING
     InstanceTypeParameter: 
       Type: String
       Default: m5.large
