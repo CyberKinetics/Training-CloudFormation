@@ -78,7 +78,7 @@ Resources:
       AvailabilityZone: !Select [ 2, !GetAZs ]    
       Tags:
       - Key: Name
-        Value: !Sub ${AWS::StackName}-Private-B
+        Value: !Sub ${AWS::StackName}-Private-C
   PrivateSubnetD:
     Type: AWS::EC2::Subnet
     Properties:
