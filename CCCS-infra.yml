@@ -1,10 +1,10 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: This template creates the CyberKinetics Corporate VPC
+Description: This template creates the Corpus Christi Catholic School main infrastructure
 Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: 10.0.0.0/24
+      CidrBlock: 10.0.2.0/23
       Tags:
       - Key: Name
         Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]  
@@ -20,8 +20,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.0.0/26
-      MapPublicIpOnLaunch: true
+      CidrBlock: 10.0.2.0/26
       AvailabilityZone: !Select [ 0, !GetAZs ]    # Returns available AZs as an array
       Tags:
       - Key: Name
@@ -30,17 +29,34 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.0.64/26
-      MapPublicIpOnLaunch: true
+      CidrBlock: 10.0.2.64/26
       AvailabilityZone: !Select [ 1, !GetAZs ]    
       Tags:
       - Key: Name
         Value: !Sub ${AWS::StackName}-Public-B
+  PublicSubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.128/26
+      AvailabilityZone: !Select [ 2, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Public-C
+  PublicSubnetD:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.192/26
+      AvailabilityZone: !Select [ 3, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Public-D
   PrivateSubnetA:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.0.128/26
+      CidrBlock: 10.0.3.0/26
       AvailabilityZone: !Select [ 0, !GetAZs ]   
       Tags:
       - Key: Name
@@ -49,18 +65,36 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.0.192/26
+      CidrBlock: 10.0.3.64/26
       AvailabilityZone: !Select [ 1, !GetAZs ]    
       Tags:
       - Key: Name
         Value: !Sub ${AWS::StackName}-Private-B
+  PrivateSubnetC:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.3.128/26
+      AvailabilityZone: !Select [ 2, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Private-C
+  PrivateSubnetD:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.3.192/26
+      AvailabilityZone: !Select [ 3, !GetAZs ]    
+      Tags:
+      - Key: Name
+        Value: !Sub ${AWS::StackName}-Private-D
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
       VpcId: !Ref VPC
       Tags:
       - Key: Name
-        Value: Public Route Table
+        Value: Public-CCCS
   PublicRoute1:   # Public route table has direct routing to IGW:
     Type: AWS::EC2::Route
     DependsOn: AttachGateway
@@ -74,7 +108,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
       - Key: Name
-        Value: Private
+        Value: Private-CCCS
   PrivateRoute1:            
     Type: AWS::EC2::Route
     Properties:
@@ -104,6 +138,16 @@ Resources:
     Properties:
       SubnetId: !Ref PublicSubnetB
       RouteTableId: !Ref PublicRouteTable
+  PublicSubnetCRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetC
+      RouteTableId: !Ref PublicRouteTable
+  PublicSubnetDRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnetD
+      RouteTableId: !Ref PublicRouteTable
   PrivateSubnetARouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
@@ -113,4 +157,14 @@ Resources:
     Type: AWS::EC2::SubnetRouteTableAssociation
     Properties:
       SubnetId: !Ref PrivateSubnetB
+      RouteTableId: !Ref PrivateRouteTable
+  PrivateSubnetCRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetC
+      RouteTableId: !Ref PrivateRouteTable
+  PrivateSubnetDRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetD
       RouteTableId: !Ref PrivateRouteTable
