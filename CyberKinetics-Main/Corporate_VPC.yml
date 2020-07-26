@@ -21,6 +21,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.0.0.0/26
+      MapPublicIpOnLaunch: true
       AvailabilityZone: !Select [ 0, !GetAZs ]    # Returns available AZs as an array
       Tags:
       - Key: Name
@@ -30,6 +31,7 @@ Resources:
     Properties:
       VpcId: !Ref VPC
       CidrBlock: 10.0.0.64/26
+      MapPublicIpOnLaunch: true
       AvailabilityZone: !Select [ 1, !GetAZs ]    
       Tags:
       - Key: Name
