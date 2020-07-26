@@ -94,7 +94,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
       - Key: Name
-        Value: Public Route Table
+        Value: Public-CCCS
   PublicRoute1:   # Public route table has direct routing to IGW:
     Type: AWS::EC2::Route
     DependsOn: AttachGateway
@@ -108,7 +108,7 @@ Resources:
       VpcId: !Ref VPC
       Tags:
       - Key: Name
-        Value: Private
+        Value: Private-CCCS
   PrivateRoute1:            
     Type: AWS::EC2::Route
     Properties:
