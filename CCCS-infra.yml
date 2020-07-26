@@ -4,7 +4,7 @@ Resources:
   VPC:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: 10.0.1.0/23
+      CidrBlock: 10.0.2.0/23
       Tags:
       - Key: Name
         Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]  
@@ -20,7 +20,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.1.0/26
+      CidrBlock: 10.0.2.0/26
       AvailabilityZone: !Select [ 0, !GetAZs ]    # Returns available AZs as an array
       Tags:
       - Key: Name
@@ -29,7 +29,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.1.64/26
+      CidrBlock: 10.0.2.64/26
       AvailabilityZone: !Select [ 1, !GetAZs ]    
       Tags:
       - Key: Name
@@ -38,7 +38,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.1.128/26
+      CidrBlock: 10.0.2.128/26
       AvailabilityZone: !Select [ 2, !GetAZs ]    
       Tags:
       - Key: Name
@@ -47,7 +47,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.1.192/26
+      CidrBlock: 10.0.2.192/26
       AvailabilityZone: !Select [ 3, !GetAZs ]    
       Tags:
       - Key: Name
@@ -56,7 +56,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.2.0/26
+      CidrBlock: 10.0.3.0/26
       AvailabilityZone: !Select [ 0, !GetAZs ]   
       Tags:
       - Key: Name
@@ -65,7 +65,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.2.64/26
+      CidrBlock: 10.0.3.64/26
       AvailabilityZone: !Select [ 1, !GetAZs ]    
       Tags:
       - Key: Name
@@ -74,7 +74,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.2.128/26
+      CidrBlock: 10.0.3.128/26
       AvailabilityZone: !Select [ 2, !GetAZs ]    
       Tags:
       - Key: Name
@@ -83,7 +83,7 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref VPC
-      CidrBlock: 10.0.2.192/26
+      CidrBlock: 10.0.3.192/26
       AvailabilityZone: !Select [ 3, !GetAZs ]    
       Tags:
       - Key: Name
